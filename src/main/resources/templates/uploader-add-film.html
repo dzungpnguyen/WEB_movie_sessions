@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>FilmHub Admin</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="@{/img/favicon.ico}" rel="icon">
+    <img th:src="@{/img/stanev2.png}" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Sidebar Start -->
+        <div th:replace="~{uploader-common :: sidebar}"></div>
+        <!-- Sidebar End -->
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+			<nav th:replace="~{uploader-common :: navbar}"></nav>
+            <!-- Navbar End -->
+
+        	<!-- Add-new-film Form Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-xl-12">
+                        <div class="bg-secondary rounded h-100 p-4">                        
+			                <h5 class="mb-4">ADD A NEW FILM TO YOUR DATABASE</h5>
+							
+							<!-- Start Notification -->
+                            <div id="notification-adding-success" style="display: none;" class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="fa fa-exclamation-circle me-2"></i>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                            <div id="notification-adding-failure" style="display: none;" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <i class="fa fa-exclamation-circle me-2"></i>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+							<!-- End Notification -->
+							
+			                <form method="post" th:object="${film}" th:action="@{/uploader/add-film/action}">
+				                <div class="form-floating mb-3">
+				                    <input type="text" class="form-control" id="floatingTitle"
+				                        placeholder="Title" th:field="*{title}" required>
+				                    <label for="floatingTitle">Title*</label>
+				                </div>
+				                <div class="form-floating mb-3">
+				                    <input type="text" class="form-control" id="floatingDuration"
+				                    	placeholder="Duration" pattern="[0-9]+(\.[0-9]{1,2})?"
+				                    	title="Enter a valid decimal number with up to 2 digits after the decimal point"
+				                    	th:field="*{duration}" required>
+				                    <label for="floatingDuration">Duration (in hours)*</label>
+				                </div>
+				                <div class="form-floating mb-3">
+				                    <input type="text" class="form-control" id="floatingLanguage"
+				                        placeholder="Language" th:field="*{language}">
+				                    <label for="floatingLanguage">Language</label>
+				                </div>
+				                <div class="form-floating mb-3">
+				                    <input type="text" class="form-control" id="floatingSubtitles"
+				                        placeholder="Subtitles"  th:field="*{subtitles}">
+				                    <label for="floatingSubtitles">Subtitles</label>
+				                </div>
+				                <div class="form-floating mb-3">
+				                    <input type="text" class="form-control" id="floatingDirector"
+				                        placeholder="Director" th:field="*{director}">
+				                    <label for="floatingDirector">Director</label>
+				                </div>
+				                <div class="form-floating mb-3">
+				                    <input type="text" class="form-control" id="floatingActors"
+				                        placeholder="Actors" th:field="*{actors}">
+				                    <label for="floatingActors">Actors</label>
+				                </div>
+				                <div class="form-floating mb-3">
+				                    <input type="text" class="form-control" id="floatingMinimumAge"
+				                        placeholder="Minimum Age" th:field="*{minimumAge}">
+				                    <label for="floatingMinimumAge">Minimum Age</label>
+				                </div>
+				                <div class="form-floating">
+				                    <textarea class="form-control" placeholder="Leave a comment here"
+				                        id="floatingTextarea" style="height: 150px;"></textarea>
+				                    <label for="floatingTextarea">Comments</label>
+				                </div>
+				                <button type="submit" class="btn btn-primary m-2">Submit</button>
+				                <button type="button" class="btn btn-outline-link m-2" th:onclick="window.location.href='/uploader/my-films'">Cancel</button>
+							</form>
+						</div>
+					</div>
+	            </div>
+	        </div>
+	        <!-- Add-new-film Form End -->
+		</div>
+		<!-- Content End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/chart/chart.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/utility.js}"></script>
+</body>
+
+</html>	        
