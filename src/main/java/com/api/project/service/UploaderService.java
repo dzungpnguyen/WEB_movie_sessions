@@ -15,12 +15,11 @@ public class UploaderService {
 	@Autowired
 	private UploaderRepository userRepository;
 	
-//	// Find uploader by id
-//	public UploaderModel findUploaderById(Long id) {
-//		Optional<UploaderModel> uploader = userRepository.findById(id);
-//    	if (uploader.isEmpty()) {
-//    		throw new EntityNotFoundException("No user found with the id: " + id.toString());
-//    	}
-//    	return uploader.orElse(null);
-//	}
+	public Uploader findUploaderByUsername(String username) {
+		Optional<Uploader> uploader = userRepository.findByUsername(username);
+//		if (uploader.isEmpty()) {
+//			throw new EntityNotFoundException("No user found with the username: " + username);
+//		}
+		return uploader.orElse(null);
+	}
 }

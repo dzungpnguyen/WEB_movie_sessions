@@ -28,11 +28,6 @@ public class Uploader {
 	
 	public Uploader() {}
 
-	public Uploader(Long id, String username) {
-		this.id = id;
-		this.username = username;
-	}
-
 	public Uploader(Long id, String username, String password) {
 		this.id = id;
 		this.username = username;

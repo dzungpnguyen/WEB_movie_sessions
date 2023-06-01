@@ -51,17 +51,15 @@
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-12">
                         <div class="bg-secondary rounded h-100 p-4">
-                            <!-- Start Table Name -->
+                            <!-- Table Name Start -->
                             <h5 class="mb-4">YOUR DATABASE</h5>
-							<!-- End Table Name -->
+							<!-- Table Name End -->
 
-							<!-- Start Table Info -->							
+							<!-- Table Info Start -->							
                             <p th:text="${message}" id="film-table-info" class="text-info"></p>
-							<!-- End Table Info -->
+							<!-- Table Info End -->
 							
-							<!-- Start Notification -->
-							
-							<!-- Start Deleting Notification -->
+							<!-- Deleting Notification Start -->
                             <div id="notification-delete-success" style="display: none;" class="notification-container alert alert-success alert-dismissible fade show" role="alert">
                                 <i class="fa fa-exclamation-circle me-2"></i>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -71,9 +69,9 @@
                                 <i class="fa fa-exclamation-circle me-2"></i>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                            <!-- End Deleting Notification -->
+                            <!-- Deleting Notification End -->
                             
-                            <!-- Start Adding Notification -->
+                            <!-- Adding Notification Start -->
                             <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="@{addingSuccess}">
                                 <i class="fa fa-exclamation-circle me-2" th:text="@{addingSuccess}"></i>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -83,7 +81,7 @@
                                 <i class="fa fa-exclamation-circle me-2" th:text="@{addingFailure}"></i>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>								                            
-							<!-- End Notification -->
+							<!-- Adding Notification End -->
 							       
 							<!-- Start Buttons -->                     
                             <div>

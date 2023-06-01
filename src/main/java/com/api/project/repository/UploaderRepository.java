@@ -9,5 +9,5 @@ import com.api.project.model.Uploader;
 
 @Repository
 public interface UploaderRepository extends CrudRepository<Uploader, Long>{
-//	Optional<Uploader> findByUsername(String username);
+	Optional<Uploader> findByUsername(String username);
 }

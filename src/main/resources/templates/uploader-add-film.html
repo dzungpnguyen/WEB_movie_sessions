@@ -43,14 +43,14 @@
 			<nav th:replace="~{uploader-common :: navbar}"></nav>
             <!-- Navbar End -->
 
-        	<!-- Add-new-film Form Start -->
+        	<!-- Form Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-12">
                         <div class="bg-secondary rounded h-100 p-4">                        
 			                <h5 class="mb-4">ADD A NEW FILM TO YOUR DATABASE</h5>
 							
-							<!-- Start Notification -->
+							<!-- Notification Start -->
                             <div id="notification-adding-success" style="display: none;" class="alert alert-success alert-dismissible fade show" role="alert">
                                 <i class="fa fa-exclamation-circle me-2"></i>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -60,7 +60,7 @@
                                 <i class="fa fa-exclamation-circle me-2"></i>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-							<!-- End Notification -->
+							<!-- Notification End -->
 							
 			                <form method="post" th:object="${film}" th:action="@{/uploader/add-film/action}">
 				                <div class="form-floating mb-3">
@@ -112,7 +112,7 @@
 					</div>
 	            </div>
 	        </div>
-	        <!-- Add-new-film Form End -->
+	        <!-- Form End -->
 		</div>
 		<!-- Content End -->
 
