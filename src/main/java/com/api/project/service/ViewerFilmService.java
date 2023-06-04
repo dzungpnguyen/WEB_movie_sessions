@@ -9,23 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.project.model.Film;
+import com.api.project.model.FilmSession;
 import com.api.project.model.Uploader;
 import com.api.project.repository.FilmRepository;
+import com.api.project.repository.FilmSessionRepository;
 import com.api.project.repository.UploaderRepository;
 
 @Service
 
 public class ViewerFilmService {
 	@Autowired
-	private final FilmRepository movieRepository;
-    private final FilmSessionRepository movieSessionRepository;
-
-    public ViewerFilmService(FilmRepository filmRepository, FilmSessionRepository filmSessionRepository) {
-        this.filmRepository = filmRepository;
-        this.filmSessionRepository = filmSessionRepository;
-    }
+	private FilmRepository filmRepository;
+    private FilmSessionRepository filmSessionRepository;
     
-
     // Find all films sessions in the database
     public List<FilmSession> findAllFilms() {
     	List<FilmSession> filmSessions = (List<FilmSession>) filmSessionRepository.findAll();
@@ -38,7 +34,7 @@ public class ViewerFilmService {
     
     	//find all sessions for one given movie 
     public List<FilmSession> getMovieSessionsByMovieName(String title) {
-        return filmSessionRepository.findByMovieName(title);
+        return filmSessionRepository.findByTitle(title);
     }
 
     	//find all movies for one given city 

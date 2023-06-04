@@ -14,33 +14,33 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.project.model.Film;
+import com.api.project.model.FilmSession;
 import com.api.project.service.UploaderFilmService;
+import com.api.project.service.ViewerFilmService;
 
 
 @Controller
 @RequestMapping("/viewer-film")
 public class ViewerFilmController {
 	@Autowired
-	private final ViewerFilmService viewerFilmService;
-
-    public ViewerFilmController(ViewerFilmService viewerFilmService) {
-        this.viewerFilmService = viewerFilmService;
-    }
+	private ViewerFilmService viewerFilmService;
     
     @GetMapping("/all-films")
-	public String findAllFilms(Model model) {
-	    List<FilmSession> films = viewerFilmService.findAllFilms();
+	public List<FilmSession> getAll() {
+	    return viewerFilmService.findAllFilms();
+    }
 
     @GetMapping("/sessions-by-movie")
-    public List<FilmSession> getMovieSessionsByMovieName(@RequestParam String movieName) {
+    public List<FilmSession> getMovieSessionsByTitle(@RequestParam String movieName) {
         return viewerFilmService.getMovieSessionsByMovieName(movieName);
     }
 
     @GetMapping("/sessions-by-city")
-    public List<MovieSession> getMovieSessionsByCity(@RequestParam String city) {
+    public List<FilmSession> getMovieSessionsByCity(@RequestParam String city) {
         return viewerFilmService.getMovieSessionsByCity(city);
     }
 
