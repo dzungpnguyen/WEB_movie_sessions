@@ -13,13 +13,17 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class UploaderService {
 	@Autowired
-	private UploaderRepository userRepository;
+	private UploaderRepository uploaderRepository;
 	
 	public Uploader findUploaderByUsername(String username) {
-		Optional<Uploader> uploader = userRepository.findByUsername(username);
+		Optional<Uploader> uploader = uploaderRepository.findByUsername(username);
 //		if (uploader.isEmpty()) {
 //			throw new EntityNotFoundException("No user found with the username: " + username);
 //		}
 		return uploader.orElse(null);
+	}
+	
+	public Uploader saveUploader(Uploader newUploader) {
+		return uploaderRepository.save(newUploader);
 	}
 }

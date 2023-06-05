@@ -40,32 +40,14 @@ public class UploaderController {
     		session.setAttribute("registeredUploader", registeredUploader);
     		return "redirect:/uploader/my-films";
     	} else {
-    		// handle wrong username and password
-//    		bindingResult.rejectValue("username", "error.uploader", "Invalid username or password. Try again.");
     		model.addAttribute("errorMessage", "Invalid username or password. Try again.");
     		return "sign-in";
     	}
     }
-    
-    @PostMapping("/test-sign-in")
-    public String testSignIn(@ModelAttribute("uploader") Uploader uploader) {
-    	return "hello-world";
-    }
 
-//    @PostMapping("/login")
-//    public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
-//        User user = userRepository.findByUsername(username);
-//        if (user != null && user.getPassword().equals(password)) {
-//            session.setAttribute("user", user);
-//            return "redirect:/films";
-//        } else {
-//            return "login";
-//        }
-//    }
-//
-//    @GetMapping("/logout")
-//    public String logout(HttpSession session) {
-//        session.removeAttribute("user");
-//        return "redirect:/login";
-//    }
+    @GetMapping("/sign-out")
+    public String signOut(HttpSession session) {
+        session.removeAttribute("registeredUploader");
+        return "redirect:/sign-in";
+    }
 }

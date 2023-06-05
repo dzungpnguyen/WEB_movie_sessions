@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<!-- 
-<body>
-	<div class="container">
-		<section id="content">
-			<form action="#" th:action="@{/login}" method="post">
-				<h1>Film Provider Login</h1>
- -->
- 
 <head>
     <meta charset="utf-8">
     <title>FilmHub Admin - Sign In</title>
@@ -57,7 +49,7 @@
                     <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <a href="index.html" class="">
-                                <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>FilmHub Admin</h3>
+                                <h3 class="text-primary"><i class="fa fa-film me-2"></i>FilmHubAdmin</h3>
                             </a>
                             <h3>Sign In</h3>
                         </div>
@@ -87,7 +79,7 @@
 	                            <a href="">Forgot Password</a>
 	                        </div>
 	                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-	                        <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a> or <a href="">Continue As Viewer</a></p>
+	                        <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a> or <a th:href="@{/viewer/films}">Continue As Viewer</a></p>
                     	</form>
                     </div>
                 </div>

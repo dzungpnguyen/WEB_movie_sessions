@@ -27,7 +27,7 @@ public class Uploader {
     private List<Film> uploadedFilms = new ArrayList<>();
 	
 	public Uploader() {}
-
+	
 	public Uploader(Long id, String username, String password) {
 		this.id = id;
 		this.username = username;

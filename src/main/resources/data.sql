@@ -1,3 +1,4 @@
+/*
 -- REMOVE OLD DATA --
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -39,3 +40,4 @@ VALUES
 -- INSERT film_sessions --
 INSERT INTO `film_sessions` (`id`, `calendar_date`, `week_day`, `start_hour`, `end_hour`, `cinema`, `city`, `film_id`)
 VALUES (NULL, '2023-05-01', 'Monday', '13:00:00', '15:00:00', 'Cinema 1', 'City 1', '5');
+*/

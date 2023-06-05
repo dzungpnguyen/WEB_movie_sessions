@@ -11,7 +11,7 @@ import com.api.project.model.Uploader;
 @Repository
 public interface FilmRepository extends CrudRepository<Film, Long> {
 	List<Film> findAllByUploader(Uploader uploader);
-//	Optional<FilmModel> findByTitle(String title);
+	Film findByTitle(String title);
 //	
 //	List<FilmModel> findAllByUserId(Long userId);
 }
