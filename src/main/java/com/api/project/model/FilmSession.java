@@ -30,12 +30,13 @@ public class FilmSession {
     private LocalTime startHour;
     private LocalTime endHour;
     private String cinema;
+    private String address;
     private String city;
     
     public FilmSession() {}
     
     public FilmSession(Long id, Film film, LocalDate calendarDate, String weekDay,
-    		LocalTime startHour, LocalTime endHour, String cinema, String city) {
+    		LocalTime startHour, LocalTime endHour, String cinema, String address, String city) {
     	this.id = id;
     	this.film = film;
     	this.calendarDate = calendarDate;
@@ -43,6 +44,7 @@ public class FilmSession {
     	this.startHour = startHour;
     	this.endHour = endHour;
     	this.cinema = cinema;
+    	this.address = address;
     	this.city = city;
     }
     
@@ -106,6 +108,14 @@ public class FilmSession {
     
     public void setCinema(String cinema) {
     	this.cinema = cinema;
+    }
+
+    public String getAddress() {
+    	return this.address;
+    }
+    
+    public void setAddress(String address) {
+    	this.address = address;
     }
     
     public String getCity() {

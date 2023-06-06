@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title th:text="@{'FilmHub - ' + ${film.title}}"></title>
+    <title th:text="'FilmHub - ' + ${film.title}"></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -40,6 +40,7 @@
         
         <!-- Content Start -->
         <div class="content">
+        
             <!-- Navbar Start -->
 			<nav th:replace="~{viewer-common :: navbar}"></nav>
             <!-- Navbar End -->
@@ -47,13 +48,13 @@
             <!-- Film Details Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
+					<!-- Film First Part Start -->
                     <div class="col-sm-12 col-xl-12">
-                       	<!-- Film First Part Start -->
                    		<div class="bg-secondary rounded h-100 align-items-center d-flex mb-5">
 
                        		<!-- Film Poster Start -->
                        		<div class="col-lg-4 text-center">
-                 				<img th:src="@{'/img/film/' + ${film.id} + '.jpg'}" alt="Movie Poster" width="365" height="545">
+                 				<img th:src="@{'/img/film/' + ${film.id} + '.jpg'}" alt="Movie Poster" width="440" height="650">
                        		</div>
                        		<!-- Film Poster End -->
                        		
@@ -65,64 +66,202 @@
                        			<!-- Film Title End -->
 
                        			<!-- Film Info Start -->
-								<div class="col-lg-8">
-									<div class="row">
-										<!-- Film General Info Start -->
-										<div class="col-lg-11">
-											Release date: ${film.startDate}
-										    <br>Plot
-										    <br>Director
-										    <br>Stars
+								<div class="row">
+									<!-- Film General Info Start -->
+									<div class="col-lg-8">
+										<div class="border rounded p-4 pb-0 mb-4">
+											<figure>
+												<blockquote class="blockquote">
+													<p>A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea 
+														into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.</p>
+												</blockquote>
+											</figure>
 										</div>
-										<!-- Film General Info End -->
-										
-										<!-- Film Rating Start -->
-										<div class="col-lg-1">
-									    	imdb rating
-									      	<br> icon star
-									      	<br>random-note/10
-									    	<br>popularity
-									    	<br>going up icon
-									    	<br>random note 80-150
-									    </div>
-									    <!-- Film Rating End -->
-								    </div>
+										<div class="border rounded p-4 pb-0 mb-4">
+											<figure>
+												<blockquote class="blockquote row">
+													<div class="col-lg-4">
+														<dt><u><p>Release Date</p></u></dt>
+														<dt><u><p>Ending Date</p></u></dt>
+													</div>
+													<div class="col-lg-8 text-info">
+														<p th:text="${film.startDate}"></p>
+														<p th:text="${film.endDate}"></p>
+													</div>
+												</blockquote>
+											</figure>
+										</div>
+										<div class="border rounded p-4 pb-0 mb-4">
+											<figure>
+												<blockquote class="blockquote row">
+													<div class="col-lg-4">
+														<dt><u><p>Director</p></u></dt>
+														<dt><u><p>Actors</p></u></dt>
+													</div>
+													<div class="col-lg-8 text-info">
+														<p th:text="${film.director}"></p>
+														<p th:text="${film.actors}"></p>
+													</div>
+												</blockquote>
+											</figure>
+										</div>
+										<div class="border rounded p-4 pb-0 mb-4">
+											<figure>
+												<blockquote class="blockquote row">
+													<div class="col-lg-4">
+														<dt><u><p>Language</p></u></dt>
+														<dt><u><p>Subtitles</p></u></dt>
+													</div>
+													<div class="col-lg-8 text-info">
+														<p th:text="${film.language}"></p>
+														<p th:text="${film.subtitles}"></p>
+													</div>
+												</blockquote>
+											</figure>
+										</div>
+									</div>
+									<!-- Film General Info End -->
+									
+									<!-- Film Rating Start -->
+									<div class="col-lg-4 d-flex flex-column">
+										<div class="p-4 m-n2">
+											<button type="button" class="btn btn-lg btn-outline-info m-2"
+												th:text="${film.formatDuration()} + ' minutes'"></button>
+											<button type="button" class="btn btn-lg btn-lg-square btn-outline-primary m-2">
+												<span class="text-primary text-center" th:text="${film.minimumAge} + '+'"></span>
+											</button>
+										</div>
+
+										<!-- IMDb Rating Start -->
+										<div class="p-4">
+											<h4 class="text-warning">IMDb Rating</h4>
+											<i class="fas fa-star fa-lg" style="color: #ffc107;"></i>
+											<strong>
+												<span class="text-white" style="font-size: 25px; font-weight: bold;"
+													th:text="${randomImdbRating}"></span>
+											</strong>/10
+										</div>
+										<!-- IMDb Rating End -->
+
+										<!-- Popularity Rating Start -->
+										<div class="p-4">
+											<h4 style="color: #3db85c;">Popularity</h4>
+											<i class="fas fa-chart-line fa-lg" style="color: #3db85c;"></i>
+											<strong>
+												<span class="text-white" style="font-size: 25px; font-weight: bold;"
+												th:text="${randomPopularityRating}"></span>
+											</strong>
+										</div>
+										<!-- Popularity Rating End -->
+									</div>
+									<!-- Film Rating End -->
 								</div>
 								<!-- Film Info End -->
                        		</div>
                        	</div>
-                       	<!-- Film First Part End -->
 					</div>
+					<!-- Film First Part End -->
 					
                     <!-- Film Trailer Start -->
                     <div class="col-sm-12 col-xl-12">  	
-                       	 <div class="bg-secondary rounded mb-5 h-100 align-items-center">
-                       	 	<div class="mt-5 mb-3">
-	                       		<span class="display-6 text-white">Movie Trailer</span>
-	                       	</div>
-                       		<div class="text-center">
-								<video th:src="@{/img/film-trailer.mp4}" width="600" height="1000" controls>
+                       	 <div class="bg-secondary rounded p-4 align-items-center">
+							<div class="text-center">
+								<video th:src="@{/img/film-trailer.mp4}" controls>
 									Your browser does not support the video tag.</video>
 							</div>
                        	</div>
 					</div>
-                       	<!-- Film Trailer End -->
+					<!-- Film Trailer End -->
                        	
-                       	<!-- Film Sessions Start -->
-                    <!-- Film Trailer Start -->
-                    <div class="col-sm-12 col-xl-12">  	
-                       	 <div class="bg-secondary rounded mb-5 align-items-center">
-                       		sessions
-                       	</div>
-                       	<!-- Film Sessions End -->
-                    </div>
-                </div>
-	            <!-- Film Details End -->
+					<!-- Film Sessions Start -->
+					<div class="col-sm-12 col-xl-12">
+						<div class="bg-secondary rounded h-100 p-4">
+							<h2 class="mb-4">Movie Sessions</h2>
+							<!-- Session List Start -->
+							<div class="row g-4">
+								<div class="col-sm-12 col-xl-4">
+									<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+										<li class="nav-item" role="presentation" th:each="filmSession : ${filmSessions}">
+											<button class="nav-link"
+												th:id="'filmSession-' + ${filmSession.id} + '-tab'" th:data-bs-toggle="'pill'"
+												th:data-bs-target="'#filmSession-' + ${filmSession.id}" type="button" role="tab"
+												th:aria-controls="'filmSession-' + ${filmSession.id}" th:aria-selected="${filmSession != null}">
+												<span style="font-size: 20px;" th:text="'Session ' + ${filmSession.id}">Session ID</span><br>
+												<span style="font-size: 20px;" th:text="${filmSession.calendarDate}">Session Date</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!-- Session List End -->
 
-	            <!-- Footer Start -->
-	            <div th:replace="~{viewer-common :: footer}"></div>
-	            <!-- Footer End -->
-	        </div>
+							<!-- Session Content Start -->
+							<div class="tab-content" id="pills-tabContent">
+								<div th:each="filmSession : ${filmSessions}" class="tab-pane fade"
+									th:id="'filmSession-' + ${filmSession.id}" role="tabpanel"
+									th:aria-labelledby="'filmSession-' + ${filmSession.id} + '-tab'"
+							        data-film-session-id="${filmSession.id}"
+							        data-film-session-calendar-date="${filmSession.calendarDate}">
+									<div class="row">								
+										<div class="col-sm-12 col-md-6 col-xl-5 p-4">
+											<div class="h-100 bg-secondary rounded text-center">
+												<h2 class="text-white p-4" th:text="'Cinema ' + ${filmSession.cinema}"></h2>
+												<span style="font-size: 22px;" th:text="${filmSession.address}"></span>
+												<!-- Session Time Start -->
+												<div class="text-center p-4">
+													<h1 class="display-4" th:text="${filmSession.startHour}"></h1>
+													<span style="font-size: 30px;" th:text="${filmSession.endHour}"></span>
+												</div>
+												<!-- Session Time End -->
+											</div>
+										</div>
+
+										<div class="col-sm-12 col-md-6 col-xl-7">
+											<div class="bg-secondary rounded h-100 p-4">
+												<th:block th:switch="${filmSession.city}">
+													<iframe class="position-relative rounded w-100 h-100"
+														th:case="'Paris'"
+														src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d266898.6198266304!2d2.277020826337961!3d48.85883770186902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis%2C%20France!5e0!3m2!1sen!2sus!4v1652367354393"
+														frameborder="0" allowfullscreen="" aria-hidden="false"
+														tabindex="0" style="filter: grayscale(100%) invert(92%) contrast(83%); border: 0;">
+													</iframe>
+													<iframe class="position-relative rounded w-100 h-100"
+														th:case="'Lyon'"
+														src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d275644.755545523!2d4.835659957481268!3d45.75793477948959!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f4f9a5f125eb7d%3A0x80cec44f7eb1b10!2sLyon%2C%20France!5e0!3m2!1sen!2sus!4v1652367408112"
+														frameborder="0" allowfullscreen="" aria-hidden="false"
+														tabindex="0" style="filter: grayscale(100%) invert(92%) contrast(83%); border: 0;">
+													</iframe>
+													<iframe class="position-relative rounded w-100 h-100"
+														th:case="'Nantes'"
+														src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109099.389779527!2d-1.553621202960794!3d47.21837135634685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4805d74a000e40a5%3A0xdffaf337f4808767!2sNantes%2C%20France!5e0!3m2!1sen!2sus!4v1652367436853"
+														frameborder="0" allowfullscreen="" aria-hidden="false"
+														tabindex="0" style="filter: grayscale(100%) invert(92%) contrast(83%); border: 0;">
+													</iframe>
+													<iframe class="position-relative rounded w-100 h-100"
+														th:case="*"
+														src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d527118.7492710046!2d2.0324075959335386!3d46.60335498930121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f24e2c4ee241ad%3A0x7acfe6940a7bd61!2sFrance!5e0!3m2!1sen!2sus!4v1652367449051"
+														frameborder="0" allowfullscreen="" aria-hidden="false"
+														tabindex="0" style="filter: grayscale(100%) invert(92%) contrast(83%); border: 0;">
+													</iframe>
+												</th:block>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Session Content End -->
+						</div>
+					</div>
+					<!-- Film Sessions End -->
+                </div>
+			</div>
+	        <!-- Film Details End -->
+
+			<!-- Footer Start -->
+			<div th:replace="~{viewer-common :: footer}"></div>
+			<!-- Footer End -->
+
+		</div>
         <!-- Content End -->
 
         <!-- Back to Top -->
@@ -138,11 +277,11 @@
     <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
     <script th:src="@{/lib/tempusdominus/js/moment.min.js}"></script>
     <script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}"></script>
-    <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"></script>
 
     <!-- Template Javascript -->
     <script th:src="@{/js/main.js}"></script>
     <script th:src="@{/js/utility.js}"></script>
+
 </body>
 
 </html>

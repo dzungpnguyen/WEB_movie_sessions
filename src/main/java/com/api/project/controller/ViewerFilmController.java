@@ -4,6 +4,7 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,19 +39,47 @@ public class ViewerFilmController {
 		return "viewer-film-list";
 	}
 	
-	@PostMapping("/films")
-	public String findAllFilmSessionsByCity(@RequestParam("city") String city, Model model) {
-		List<FilmSession> filmSessions = viewerFilmService.findAllFilmSessionsByCity(city);
-		model.addAttribute("filmSessions", filmSessions);
-		return "viewer-film-session-list";
+	@PostMapping("/search")
+	public String findFilmSessionsByCityAndFilmsByTitle(@RequestParam(required = false) String city,
+			@RequestParam(required = false) String title, Model model) {
+		if (city != "" && title == "") {
+			List<Film> filmsInCity = viewerFilmService.findAllFilmsByCity(city);
+			System.out.println(filmsInCity);
+			if (filmsInCity.isEmpty()) {
+				model.addAttribute("errorSearch", "No films found in " + city);
+			} else {
+				model.addAttribute("films", filmsInCity);
+			}
+		} else if (title != "" && city == "") {
+			List<Film> filmsContainingTitle = viewerFilmService.findAllFilmsByTitleContaining(title);
+			if (filmsContainingTitle.isEmpty()) {
+				model.addAttribute("errorSearch", "No films found in with title " + title);
+			} else {
+				model.addAttribute("films", filmsContainingTitle);
+			}
+		} else {
+			model.addAttribute("errorSearch", "Only one field is allowed.");
+			List<Film> films = viewerFilmService.findAllFilms();
+			model.addAttribute("films", films);
+		}
+		return "viewer-film-list";
 	}
+	
 	
 	@GetMapping("/film/{encodedTitle}")
 	public String showFilmDetails(@PathVariable("encodedTitle") String encodedTitle, Model model) {
 		String title = UriUtils.decode(encodedTitle, "UTF-8");
 		Film film = viewerFilmService.findFilmByTitle(title);
 		if (film != null) {
-			model.addAttribute("film", film);
+			List<FilmSession> filmSessions = viewerFilmService.findAllFilmSessionsByFilm(film);
+	        Random random = new Random();
+	        Double randomImdbRating = 7.0 + (random.nextDouble() * (9.8 - 7.0));
+	        randomImdbRating = Math.round(randomImdbRating * 10.0) / 10.0;
+	        Integer randomPopularityRating = random.nextInt(61) + 70;
+	        model.addAttribute("film", film);
+			model.addAttribute("filmSessions", filmSessions);
+			model.addAttribute("randomImdbRating", randomImdbRating);
+			model.addAttribute("randomPopularityRating", randomPopularityRating);
 			return "viewer-film-details";
 		} else {
             model.addAttribute("errorMessage", "Internal error while searching film " + title + ". Please try again later.");

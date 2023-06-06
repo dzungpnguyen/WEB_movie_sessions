@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.project.model.Film;
+import com.api.project.model.FilmSession;
 import com.api.project.model.Uploader;
 import com.api.project.service.UploaderFilmService;
 
@@ -70,7 +71,20 @@ public class UploaderFilmController {
 	    	return "uploader-add-film";	    	
 	    } else {
 	    	return "redirect:/sign-in";
-//	    	return "hello-world";
+	    }
+	}
+		
+	@GetMapping("/add-session")
+	public String showAddSessionForm(HttpSession session, Model model) {
+		Uploader registeredUploader = (Uploader) session.getAttribute("registeredUploader");
+	    if (registeredUploader != null) {
+	    	model.addAllAttributes(Map.of(
+	    			"sessionUploader", registeredUploader,
+	    			"filmSession", new FilmSession()
+	    			));
+	    	return "uploader-add-session";
+	    } else {
+	    	return "redirect:/sign-in";
 	    }
 	}
 		

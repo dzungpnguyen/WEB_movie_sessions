@@ -60,46 +60,46 @@ public class DataInitializer implements CommandLineRunner {
         
         //Pre-populate the list of Film Sessions
         FilmSession filmSession1 = new FilmSession(1L, film1, LocalDate.of(2023, 6, 12), "Monday",
-        		LocalTime.of(18, 0), LocalTime.of(20, 30), "Le Cinéma Paradis", "Paris");
+        		LocalTime.of(18, 0), LocalTime.of(20, 30), "Le Cinéma Paradis", "123 Rue de Paris, 75001 Paris", "Paris");
         FilmSession filmSession2 = new FilmSession(2L, film1, LocalDate.of(2023, 6, 14), "Wednesday",
-        		LocalTime.of(10, 30), LocalTime.of(13, 0), "Ciné Lumière", "Lyon");
+        		LocalTime.of(10, 30), LocalTime.of(13, 0), "Ciné Lumière", "111 Rue du Vieux Lyon, 69005 Lyon", "Lyon");
         FilmSession filmSession3 = new FilmSession(3L, film1, LocalDate.of(2023, 6, 16), "Friday",
-        		LocalTime.of(21, 20), LocalTime.of(23, 50), "Le Cinéma Mystère", "Nantes");
+        		LocalTime.of(21, 20), LocalTime.of(23, 50), "Le Cinéma Mystère", "55 Quai de la Fosse, 44000 Nantes", "Nantes");
         
         FilmSession filmSession4 = new FilmSession(4L, film2, LocalDate.of(2023, 10, 3), "Tuesday",
-        		LocalTime.of(18, 0), LocalTime.of(20, 10), "L'Écran Magique", "Paris");
+        		LocalTime.of(18, 0), LocalTime.of(20, 10), "L'Écran Magique", "456 Avenue des Champs-Élysées, 75008 Paris", "Paris");
         FilmSession filmSession5 = new FilmSession(5L, film2, LocalDate.of(2023, 10, 5), "Thursday",
-        		LocalTime.of(13, 25), LocalTime.of(15, 35), "L'Écran Bleu", "Lyon");
+        		LocalTime.of(13, 25), LocalTime.of(15, 35), "L'Écran Bleu", "222 Avenue des Frères Lumière, 69008 Lyon", "Lyon");
         FilmSession filmSession6 = new FilmSession(6L, film2, LocalDate.of(2023, 10, 7), "Saturday",
-        		LocalTime.of(11, 30), LocalTime.of(13, 40), "L'Écran Enchanté", "Nantes");
+        		LocalTime.of(11, 30), LocalTime.of(13, 40), "L'Écran Enchanté", "66 Rue du Calvaire, 44000 Nantes", "Nantes");
 
         FilmSession filmSession7 = new FilmSession(7L, film3, LocalDate.of(2023, 6, 16), "Friday",
-        		LocalTime.of(14, 0), LocalTime.of(16, 25), "Le Grand Cinéma", "Paris");
+        		LocalTime.of(14, 0), LocalTime.of(16, 25), "Le Grand Cinéma", "789 Rue du Louvre, 75002 Paris", "Paris");
         FilmSession filmSession8 = new FilmSession(8L, film3, LocalDate.of(2023, 6, 18), "Sunday",
-        		LocalTime.of(19, 15), LocalTime.of(21, 40), "Cinéphile Plaza", "Lyon");
+        		LocalTime.of(19, 15), LocalTime.of(21, 40), "Cinéphile Plaza", "333 Rue Garibaldi, 69007 Lyon", "Lyon");
         FilmSession filmSession9 = new FilmSession(9L, film3, LocalDate.of(2023, 6, 20), "Tuesday",
-        		LocalTime.of(9,55), LocalTime.of(12, 20), "Cinéphile Palace", "Paris");
+        		LocalTime.of(9,55), LocalTime.of(12, 20), "Cinéphile Palace", "10 Boulevard Saint-Germain, 75005 Paris", "Paris");
         
         FilmSession filmSession10 = new FilmSession(10L, film4, LocalDate.of(2023, 6, 20), "Tuesday",
-        		LocalTime.of(9,55), LocalTime.of(12, 20), "Le Cinéma Étoile", "Paris");
+        		LocalTime.of(9,55), LocalTime.of(12, 20), "Le Cinéma Étoile", "321 Rue de Rivoli, 75004 Paris", "Paris");
         
         FilmSession filmSession11 = new FilmSession(11L, film5, LocalDate.of(2023, 6, 20), "Tuesday",
-        		LocalTime.of(9,55), LocalTime.of(12, 20), "Le Cinéma Paradis", "Paris");
+        		LocalTime.of(9,55), LocalTime.of(12, 20), "Le Cinéma Paradis", "123 Rue de Paris, 75001 Paris", "Paris");
         
         FilmSession filmSession12 = new FilmSession(12L, film6, LocalDate.of(2023, 6, 20), "Tuesday",
-        		LocalTime.of(9,55), LocalTime.of(12, 20), "Ciné Lumière", "Lyon");
+        		LocalTime.of(9,55), LocalTime.of(12, 20), "Ciné Lumière", "111 Rue du Vieux Lyon, 69005 Lyon", "Lyon");
         
         FilmSession filmSession13 = new FilmSession(13L, film7, LocalDate.of(2023, 6, 20), "Tuesday",
-        		LocalTime.of(9,55), LocalTime.of(12, 20), "Le Cinéma Mystère", "Nantes");
+        		LocalTime.of(9,55), LocalTime.of(12, 20), "Le Cinéma Mystère", "55 Quai de la Fosse, 44000 Nantes", "Nantes");
         
         FilmSession filmSession14 = new FilmSession(14L, film8, LocalDate.of(2023, 6, 20), "Tuesday",
-        		LocalTime.of(9,55), LocalTime.of(12, 20), "L'Écran Magique", "Paris");
+        		LocalTime.of(9,55), LocalTime.of(12, 20), "L'Écran Magique", "456 Avenue des Champs-Élysées, 75008 Paris", "Paris");
         
         FilmSession filmSession15 = new FilmSession(15L, film9, LocalDate.of(2023, 6, 20), "Tuesday",
-        		LocalTime.of(9,55), LocalTime.of(12, 20), "L'Écran Bleu", "Lyon");
+        		LocalTime.of(9,55), LocalTime.of(12, 20), "L'Écran Bleu", "222 Avenue des Frères Lumière, 69008 Lyon", "Lyon");
         
         FilmSession filmSession16 = new FilmSession(16L, film10, LocalDate.of(2023, 6, 20), "Tuesday",
-        		LocalTime.of(9,55), LocalTime.of(12, 20), "L'Écran Enchanté", "Nantes");
+        		LocalTime.of(9,55), LocalTime.of(12, 20), "L'Écran Enchanté", "66 Rue du Calvaire, 44000 Nantes", "Nantes");
 
         filmSessionRepository.saveAll(Arrays.asList(filmSession1, filmSession2, filmSession3, filmSession4, filmSession5,
         		filmSession6, filmSession7, filmSession8, filmSession9, filmSession10, filmSession11, filmSession12,

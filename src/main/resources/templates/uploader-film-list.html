@@ -140,8 +140,8 @@
 											</ul>
 							            </td>
 							            <td>
-							                <button type="button" class="btn btn-success m-2" onclick="function_to_add_or_update_film_session">
-							                	<i class="fa fa-plus me-2"></i>Update Sessions</button>
+			                            	<button type="button" class="btn btn-success m-2" th:onclick="window.location.href='/uploader/add-session'">
+			                            		<i class="fa fa-plus me-2"></i>Add Session</button>
 							                <button type="button" class="btn btn-warning m-2" onclick="function_to_update_a_film">
 							                	<i class="fa fa-pencil-alt me-2"></i>Update</button>
 								        	<button type="button" class="btn btn-danger m-2" th:data-filmId="${film.id}" th:data-filmTitle="${film.title}" th:onclick="confirmDeleteFilm(this)">

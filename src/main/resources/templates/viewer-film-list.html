@@ -52,14 +52,22 @@
 	                        <!-- Search Start -->
                             <h5 class="mb-3">Search by City or Movie Title</h5>
                             <!-- Search Form Start -->
-                            <form th:action="@{/viewer/films/{city}}" method="post">
+                            <form th:action="@{/viewer/search}" method="post">
 	                            <div class="d-flex mb-2">
 	                                <input class="form-control bg-transparent me-2" name="city" type="text" placeholder="Ex: Paris, Lyon...">
                          			<input class="form-control bg-transparent me-2" name="title" type="text" placeholder="Ex: The Godfather, Interstella...">
-	                                <button type="button" class="btn btn-primary ms-2">Search Now</button>
+	                                <button type="submit" class="btn btn-primary ms-2">Search Now</button>
 	                            </div>
 	                        </form>
 							<!-- Search Form End -->
+
+							<!-- Error Message Start -->
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:unless="${errorSearch == null}">
+                                <i class="fa fa-exclamation-circle me-2"> Only one field is allowed.</i>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <!-- Error Message End -->
+                            
 							<!-- Search End -->
 	
 							<!-- Notification Start -->					

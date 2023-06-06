@@ -1,7 +1,10 @@
 package com.api.project.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,16 +30,32 @@ public class ViewerFilmService {
     	return films;
     }
     
-    public List<FilmSession> findAllFilmSessionsByCity(String city) {
-    	List<FilmSession> filmSessions = filmSessionRepository.findAllByCity(city);
-    	if (filmSessions.isEmpty()) {
+    public List<Film> findAllFilmsByCity(String city) {
+        List<FilmSession> filmSessionsInCity = filmSessionRepository.findAllByCity(city);
+        Set<Film> films = filmSessionsInCity.stream()
+                .map(FilmSession::getFilm)
+                .collect(Collectors.toSet());
+        return new ArrayList<>(films);
+    }
+        
+    public List<Film> findAllFilmsByTitleContaining(String title) {
+    	List<Film> films = filmRepository.findByTitleContaining(title);
+    	if (films.isEmpty()) {
     		return Collections.emptyList();
     	}
-    	return filmSessions;
+    	return films;
     }
     
     public Film findFilmByTitle(String title) {
     	Film film = filmRepository.findByTitle(title);
     	return film;
+    }
+    
+    public List<FilmSession> findAllFilmSessionsByFilm(Film film) {
+    	List<FilmSession> filmSessions = filmSessionRepository.findAllByFilm(film);
+    	if (filmSessions.isEmpty()) {
+    		return Collections.emptyList();
+    	}
+    	return filmSessions;
     }
 }
