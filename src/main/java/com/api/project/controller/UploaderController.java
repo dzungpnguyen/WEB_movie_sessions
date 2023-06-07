@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.api.project.model.Film;
 import com.api.project.model.Uploader;
 import com.api.project.service.UploaderService;
 
@@ -22,17 +20,20 @@ public class UploaderController {
 	@Autowired
 	private UploaderService uploaderService;
 	
+	// Redirected to sign in page
 	@GetMapping("")
 	public String redirectToSignIn() {
 		return "redirect:/sign-in";
 	}
 
+	// Show sign in page
     @GetMapping("/sign-in")
     public String signInPage(Model model) {
     	model.addAttribute("uploader", new Uploader());
         return "sign-in";
     }
     
+    // Authenticate users
     @PostMapping("/sign-in")
     public String signIn(@ModelAttribute("uploader") Uploader uploader, BindingResult bindingResult, HttpSession session, Model model) {
     	Uploader registeredUploader = uploaderService.findUploaderByUsername(uploader.getUsername());
@@ -45,6 +46,7 @@ public class UploaderController {
     	}
     }
 
+    // Sign out
     @GetMapping("/sign-out")
     public String signOut(HttpSession session) {
         session.removeAttribute("registeredUploader");

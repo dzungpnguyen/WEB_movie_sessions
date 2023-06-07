@@ -7,7 +7,11 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-     
+
+    <!-- Favicon -->
+    <link href="@{/img/favicon.ico}" rel="icon">
+    <img th:src="@{/img/stanev2.png}" />
+
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +30,7 @@
     <!-- Template Stylesheet -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
+
 <body>
     <div class="container-fluid position-relative d-flex p-0">
         <!-- Sidebar Start -->
@@ -43,40 +48,67 @@
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-12">
                         <div class="bg-secondary rounded h-100 p-4">                        
-			                <h5 class="mb-4" th:text="'ADD NEW SESSION TO FILM ' + ${#strings.toUpperCase(selectedFilm.title)}"></h5>
+			                <h5 class="mb-4" th:text="'UPDATE FILM ' + ${#strings.toUpperCase(selectedFilm.title)}"></h5>
 							
-							<!-- Filling Form Start -->
-			                <form method="post" th:object="${filmSession}" th:action="@{'/uploader/add-session/' + ${selectedFilm.id}}">
-								<div class="form-floating mb-3">
-				                    <input type="hidden" class="form-control" id="floatingFilm"
-				                        th:field="*{film}" th:value="${selectedFilm}">
-				                    <label for="floatingFilmId">Film ID</label>
-				                </div>
-								<div class="form-floating mb-3">
-				                    <input type="date" class="form-control" id="floatingCalendarDate"
-				                        placeholder="Date" th:field="*{calendarDate}" required>
-				                    <label for="floatingCalendarDate">Date*</label>
+							<!-- Filling Form Start  th:object="${newFilm}"  -->
+			                <form method="post" th:action="@{'/uploader/update/' + ${selectedFilm.id}}">
+				                <div class="form-floating mb-3">
+				                    <input type="hidden" class="form-control" id="newId"
+				                        th:value="${selectedFilm.id}" name="newId">
+				                    <label for="newId">ID*</label>
 				                </div>
 				                <div class="form-floating mb-3">
-				                    <input type="time" class="form-control" id="floatingStartHour"
-				                    	placeholder="Start Hour" pattern="[0-9]+(\.[0-9]{1,2})?"
-				                    	th:field="*{startHour}" required>
-				                    <label for="floatingStartHour">Start Hour*</label>
+				                    <input type="text" class="form-control" id="newTitle"
+				                        th:value="${selectedFilm.title}" name="newTitle" required>
+				                    <label for="newTitle">Title*</label>
 				                </div>
 				                <div class="form-floating mb-3">
-				                    <input type="text" class="form-control" id="floatingCinema"
-				                        placeholder="Cinema" th:field="*{cinema}" required>
-				                    <label for="floatingCinema">Cinema*</label>
+				                    <input type="text" class="form-control" id="newDuration"
+				                    	pattern="[0-9]+(\.[0-9]{1,2})?"
+				                    	title="Enter a valid decimal number with up to 2 digits after the decimal point"
+				                    	th:value="${selectedFilm.duration}" name="newDuration" required>
+				                    <label for="newDuration">Duration (in hours)*</label>
 				                </div>
 				                <div class="form-floating mb-3">
-				                    <input type="text" class="form-control" id="floatingAddress"
-				                        placeholder="Address" th:field="*{address}" required>
-				                    <label for="floatingAddress">Address</label>
+				                    <input type="text" class="form-control" id="newLanguage"
+				                        th:value="${selectedFilm.language}" name="newLanguage" required>
+				                    <label for="newLanguage">Language*</label>
 				                </div>
 				                <div class="form-floating mb-3">
-				                    <input type="text" class="form-control" id="floatingCity"
-				                        placeholder="City" th:field="*{city}" required>
-				                    <label for="floatingCity">City</label>
+				                    <input type="text" class="form-control" id="newSubtitles"
+				                        th:value="${selectedFilm.subtitles}" name="newSubtitles">
+				                    <label for="newSubtitles">Subtitles</label>
+				                </div>
+				                <div class="form-floating mb-3">
+				                    <input type="text" class="form-control" id="newDirector"
+				                        th:value="${selectedFilm.director}" name="newDirector" required>
+				                    <label for="newDirector">Director*</label>
+				                </div>
+				                <div class="form-floating mb-3">
+				                    <input type="text" class="form-control" id="newActors"
+				                        th:value="${selectedFilm.actors}" name="newActors" required>
+				                    <label for="newActors">Actors*</label>
+				                </div>
+				                <div class="form-floating mb-3">
+				                    <input type="text" class="form-control" id="newMinimumAge"
+				                        th:value="${selectedFilm.minimumAge}" name="newMinimumAge" required>
+				                    <label for="newMinimumAge">Minimum Age*</label>
+				                </div>
+				                <div class="form-floating mb-3">
+					                <input type="date" class="form-control" id="newStartDate"
+				                        th:value="${selectedFilm.startDate}" name="newStartDate" required>
+				                    <label for="newStartDate">Start Date*</label>
+				                </div>
+				                <div class="form-floating mb-3">
+					                <input type="date" class="form-control" id="newEndDate"
+				                        th:value="${selectedFilm.endDate}" name="newEndDate" required>
+				                    <label for="newEndDate">End Date*</label>
+				                </div>
+				                
+				                <div class="form-floating">
+				                    <textarea class="form-control" placeholder="Leave a comment here"
+				                        id="floatingTextarea" style="height: 150px;"></textarea>
+				                    <label for="floatingTextarea">Comments</label>
 				                </div>
 				                <button type="submit" class="btn btn-primary m-2">Submit</button>
 				                <button type="button" class="btn btn-outline-link m-2" th:onclick="window.location.href='/uploader/my-films'">Cancel</button>
@@ -110,4 +142,4 @@
     <script th:src="@{/js/utility.js}"></script>
 </body>
 
-</html>
+</html>	        

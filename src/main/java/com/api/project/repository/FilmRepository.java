@@ -13,6 +13,5 @@ public interface FilmRepository extends CrudRepository<Film, Long> {
 	List<Film> findAllByUploader(Uploader uploader);
 	Film findByTitle(String title);
 	List<Film> findByTitleContaining(String title);
-//	
-//	List<FilmModel> findAllByUserId(Long userId);
+//	List<FilmModel> findAllByUploaderId(Long userId);
 }

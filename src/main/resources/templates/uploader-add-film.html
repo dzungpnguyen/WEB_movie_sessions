@@ -78,8 +78,8 @@
 				                </div>
 				                <div class="form-floating mb-3">
 				                    <input type="text" class="form-control" id="floatingLanguage"
-				                        placeholder="Language" th:field="*{language}">
-				                    <label for="floatingLanguage">Language</label>
+				                        placeholder="Language" th:field="*{language}" required>
+				                    <label for="floatingLanguage">Language*</label>
 				                </div>
 				                <div class="form-floating mb-3">
 				                    <input type="text" class="form-control" id="floatingSubtitles"
@@ -88,28 +88,28 @@
 				                </div>
 				                <div class="form-floating mb-3">
 				                    <input type="text" class="form-control" id="floatingDirector"
-				                        placeholder="Director" th:field="*{director}">
-				                    <label for="floatingDirector">Director</label>
+				                        placeholder="Director" th:field="*{director}" required>
+				                    <label for="floatingDirector">Director*</label>
 				                </div>
 				                <div class="form-floating mb-3">
 				                    <input type="text" class="form-control" id="floatingActors"
-				                        placeholder="Actors" th:field="*{actors}">
-				                    <label for="floatingActors">Actors</label>
+				                        placeholder="Actors" th:field="*{actors}" required>
+				                    <label for="floatingActors">Actors*</label>
 				                </div>
 				                <div class="form-floating mb-3">
-				                    <input type="text" class="form-control" id="floatingMinimumAge"
-				                        placeholder="Minimum Age" th:field="*{minimumAge}">
-				                    <label for="floatingMinimumAge">Minimum Age</label>
+				                    <input type="number" class="form-control" id="floatingMinimumAge"
+				                        placeholder="Minimum Age" th:field="*{minimumAge}" required>
+				                    <label for="floatingMinimumAge">Minimum Age*</label>
 				                </div>
 				                <div class="form-floating mb-3">
 					                <input type="date" class="form-control" id="floatingStartDate"
-				                        placeholder="Start Date" th:field="*{startDate}">
-				                    <label for="floatingStartDate">Start Date</label>
+				                        placeholder="Start Date" th:field="*{startDate}" required>
+				                    <label for="floatingStartDate">Start Date*</label>
 				                </div>
 				                <div class="form-floating mb-3">
 					                <input type="date" class="form-control" id="floatingEndDate"
-				                        placeholder="End Date" th:field="*{endDate}">
-				                    <label for="floatingEndDate">End Date</label>
+				                        placeholder="End Date" th:field="*{endDate}" required>
+				                    <label for="floatingEndDate">End Date*</label>
 				                </div>
 				                
 				                <div class="form-floating">

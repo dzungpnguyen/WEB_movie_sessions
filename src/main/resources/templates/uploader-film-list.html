@@ -7,11 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
-    <!-- Favicon -->
-    <link th:href="@{/img/favicon.ico}" rel="icon">
-    <img th:src="@{/img/stanev2.png}" />
-
+     
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,19 +52,31 @@
                             <p th:text="${message}" id="film-table-info" class="text-info"></p>
 							<!-- Table Info End -->
 							
-							<!-- Deleting Notification Start -->
-                            <div id="notification-delete-success" style="display: none;" class="notification-container alert alert-success alert-dismissible fade show" role="alert">
-                                <i class="fa fa-exclamation-circle me-2"></i>
+							<!-- Deleting Film Notification Start -->
+                            <div class="alert alert-success alert-dismissible fade show" role="alert" th:unless="${deletingSuccessMessage == null}">
+                                <i class="fa fa-exclamation-circle me-2"></i>Film deleted successfully.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-
-                            <div id="notification-delete-failure" style="display: none;" class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <i class="fa fa-exclamation-circle me-2"></i>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                            <!-- Deleting Notification End -->
                             
-                            <!-- Adding Notification Start -->
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:unless="${deletingFailureMessage == null}">
+                                <i class="fa fa-exclamation-circle me-2"></i>Failed to delete film.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>		
+                            <!-- Deleting Film Notification End -->
+                            
+							<!-- Deleting Film Session Notification Start -->
+                            <div class="alert alert-success alert-dismissible fade show" role="alert" th:unless="${deletingSessionSuccessMessage == null}">
+                                <i class="fa fa-exclamation-circle me-2"></i>Film session deleted successfully.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:unless="${deletingSessionFailureMessage == null}">
+                                <i class="fa fa-exclamation-circle me-2"></i>Failed to delete film session.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>		
+                            <!-- Deleting Film Session Notification End -->
+                            
+                            <!-- Adding Film Notification Start -->
                             <div class="alert alert-success alert-dismissible fade show" role="alert" th:unless="${addingSuccessMessage == null}">
                                 <i class="fa fa-exclamation-circle me-2"></i>New film added successfully.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -78,12 +86,28 @@
                                 <i class="fa fa-exclamation-circle me-2"></i>Failed to add new film.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>								                            
-							<!-- Adding Notification End -->
+							<!-- Adding Film Notification End -->
 							       
+                            <!-- Adding Film Session Notification Start -->
+                            <div class="alert alert-success alert-dismissible fade show" role="alert" th:unless="${addingSessionSuccessMessage == null}">
+                                <i class="fa fa-exclamation-circle me-2"></i>New film session added successfully.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:unless="${addingFailureMessage == null}">
+                                <i class="fa fa-exclamation-circle me-2"></i>Failed to add new film session.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>								                            
+							<!-- Adding Film Session Notification End -->
+
 							<!-- Start Buttons -->                     
                             <div>
                             	<button type="button" class="btn btn-success m-2" th:onclick="window.location.href='/uploader/add-film'">
                             		<i class="fa fa-plus me-2"></i>Add New Film</button>
+				                <button type="button" class="btn btn-warning m-2" th:onclick="window.location.href='/uploader/update-film'">
+				                	<i class="fa fa-pencil-alt me-2"></i>Update A Film</button>
+                            	<button type="button" class="btn btn-success m-2" th:onclick="window.location.href='/uploader/add-session'">
+                            		<i class="fa fa-plus me-2"></i>Add New Session</button>
 								<button type="button" class="btn btn-danger m-2"><i class="fa fa-trash me-2"></i>Delete All Films</button>
                             	<button type="button" class="btn btn-danger m-2" id="deleteSelectedFilmsButton" th:if="${selectedFilms > 0}">
                             		<i class="fa fa-trash-o me-2"></i>Delete Selected Films</button>
@@ -110,12 +134,13 @@
                                 </thead>
 				              	<tbody>
                                     <tr th:each="film : ${films}">
-                                    	<td><input type="checkbox" th:name="'selectedFilms'" th:value="${film.id}"></td>
+										<td>
+											<a th:href="@{/uploader/delete/{filmId}(filmId=${film.id})}">
+								        		<i class="fa fa-trash me-2"></i>
+								        	</a>
+								       	</td>
                                         <td th:text="${film.id}"></td>
 							            <td th:text="${film.title}"></td>
-							            <!-- 
-							            <td th:text="${film.formatDuration()}"></td>
-							             -->
 							            <td th:text="${film.formatDuration()} + ' minutes'"></td>
 							            <td th:text="${film.language}"></td>
 							            <td th:text="${film.subtitles}"></td>
@@ -131,7 +156,7 @@
 											    		<span th:text="${iteration.index + 1}"></span>
 											    	</h6>
 											        <span>Date: <span th:text="${filmSession.calendarDate}"></span></span><br>
-											        <span>On: <span th:text="${filmSession.weekDay}"></span></span><br>
+											        <span>On: <span th:text="${#strings.toUpperCase(filmSession.weekDay)}"></span></span><br>
 											        <span>Start At: <span th:text="${filmSession.startHour}"></span></span><br>
 											        <span>End At: <span th:text="${filmSession.endHour}"></span></span><br>
 											        <span>Cinema: <span th:text="${filmSession.cinema}"></span></span><br>
@@ -140,12 +165,24 @@
 											</ul>
 							            </td>
 							            <td>
-			                            	<button type="button" class="btn btn-success m-2" th:onclick="window.location.href='/uploader/add-session'">
-			                            		<i class="fa fa-plus me-2"></i>Add Session</button>
-							                <button type="button" class="btn btn-warning m-2" onclick="function_to_update_a_film">
-							                	<i class="fa fa-pencil-alt me-2"></i>Update</button>
-								        	<button type="button" class="btn btn-danger m-2" th:data-filmId="${film.id}" th:data-filmTitle="${film.title}" th:onclick="confirmDeleteFilm(this)">
-								        		<i class="fa fa-trash me-2"></i>Delete</button>
+								        	<a th:href="@{/uploader/update/{filmId}(filmId=${film.id})}">
+								        		<button type="button" class="btn btn-warning m-2">
+								        			<i class="fa fa-pencil-alt me-2"></i>Update Film
+								        		</button>
+							        		</a>
+								        	<a th:href="@{/uploader/add-session/{filmId}(filmId=${film.id})}">
+								        		<button type="button" class="btn btn-success m-2">
+								        			<i class="fa fa-plus me-2"></i>Add New Session
+								        		</button>
+							        		</a>
+										    <div th:each="filmSession, iteration : ${film.filmSessions}">
+									        	<a th:href="@{/uploader/delete-session/{filmSessionId}(filmSessionId=${filmSession.id})}">
+									        		<button type="button" class="btn btn-danger m-2">
+									        			<i class="fa fa-trash me-2"></i>
+									        			<span th:text="'Delete Session ' + ${iteration.index + 1}"></span>
+									        		</button>
+								        		</a>
+										    </div>
 							            </td>
                                     </tr>
                                 </tbody>

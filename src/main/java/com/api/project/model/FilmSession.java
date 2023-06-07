@@ -1,7 +1,6 @@
 package com.api.project.model;
 
 import java.time.DayOfWeek;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -26,7 +25,6 @@ public class FilmSession {
     
     private LocalDate calendarDate;
     private String weekDay;
-//    private transient DayOfWeek weekDay;
     private LocalTime startHour;
     private LocalTime endHour;
     private String cinema;
@@ -47,7 +45,7 @@ public class FilmSession {
     	this.address = address;
     	this.city = city;
     }
-    
+
     public Long getId() {
     	return this.id;
     }
@@ -70,12 +68,16 @@ public class FilmSession {
 
     public void setCalendarDate(LocalDate calendarDate) {
         this.calendarDate = calendarDate;
-        DayOfWeek weekDay = calendarDate.getDayOfWeek();
-        this.weekDay = weekDay.name();
     }
 
     public String getWeekDay() {
         return this.weekDay;
+    }
+
+    // Set weekday based on calendar date
+    public void setWeekday() {
+        DayOfWeek weekDay = this.calendarDate.getDayOfWeek();
+        this.weekDay = weekDay.name();
     }
     
     public LocalTime getStartHour() {
@@ -84,18 +86,19 @@ public class FilmSession {
     
     public void setStartHour(LocalTime startHour) {
     	this.startHour = startHour;
-    	setEndHour();
+    	// setEndHour();
     }
 
+    public LocalTime getEndHour() {
+    	return this.endHour;
+    }
+
+    // Set end hour based on start hour and film duration
     public void setEndHour() {
     	Long durationInMinutes = this.film.formatDuration();
         if (this.startHour != null && durationInMinutes != null) {
             this.endHour = startHour.plusMinutes(durationInMinutes);
         }
-    }
-    
-    public LocalTime getEndHour() {
-    	return this.endHour;
     }
     
     public void setEndHour(LocalTime endHour) {

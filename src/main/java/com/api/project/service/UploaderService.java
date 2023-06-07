@@ -8,21 +8,18 @@ import org.springframework.stereotype.Service;
 import com.api.project.model.Uploader;
 import com.api.project.repository.UploaderRepository;
 
-import jakarta.persistence.EntityNotFoundException;
-
 @Service
 public class UploaderService {
 	@Autowired
 	private UploaderRepository uploaderRepository;
 	
+	// Find uploader by username
 	public Uploader findUploaderByUsername(String username) {
 		Optional<Uploader> uploader = uploaderRepository.findByUsername(username);
-//		if (uploader.isEmpty()) {
-//			throw new EntityNotFoundException("No user found with the username: " + username);
-//		}
 		return uploader.orElse(null);
 	}
 	
+	// Save an uploader
 	public Uploader saveUploader(Uploader newUploader) {
 		return uploaderRepository.save(newUploader);
 	}

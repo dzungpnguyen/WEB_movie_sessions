@@ -1,12 +1,9 @@
 package com.api.project.model;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -56,16 +53,6 @@ public class Film {
         this.filmSessions = new HashSet<>();
     }
     
-//    public String toJson(List<String> myList) {
-//    	String myJson = new Gson().toJson(myList);
-//    	return myJson;
-//    }
-//    
-//    public List<String> toList(String myJson) {
-//    	List<String> myList = new Gson().fromJson(myJson, new TypeToken<List<String>>() {}.getType());
-//    	return myList;
-//    }
-
     public Long getId() {
         return this.id;
     }

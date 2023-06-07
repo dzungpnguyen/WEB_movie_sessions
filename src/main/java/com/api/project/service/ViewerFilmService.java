@@ -22,6 +22,7 @@ public class ViewerFilmService {
 	@Autowired
 	private FilmSessionRepository filmSessionRepository;
 	
+	// Find all films in the database
     public List<Film> findAllFilms() {
     	List<Film> films = (List<Film>) filmRepository.findAll();
     	if (films.isEmpty()) {
@@ -30,6 +31,7 @@ public class ViewerFilmService {
     	return films;
     }
     
+    // Find all films having film sessions in a given city
     public List<Film> findAllFilmsByCity(String city) {
         List<FilmSession> filmSessionsInCity = filmSessionRepository.findAllByCity(city);
         Set<Film> films = filmSessionsInCity.stream()
@@ -37,7 +39,8 @@ public class ViewerFilmService {
                 .collect(Collectors.toSet());
         return new ArrayList<>(films);
     }
-        
+
+    // Find all films if their titles contain a given string
     public List<Film> findAllFilmsByTitleContaining(String title) {
     	List<Film> films = filmRepository.findByTitleContaining(title);
     	if (films.isEmpty()) {
@@ -46,11 +49,13 @@ public class ViewerFilmService {
     	return films;
     }
     
+    // Find a film by exact title
     public Film findFilmByTitle(String title) {
     	Film film = filmRepository.findByTitle(title);
     	return film;
     }
     
+    // Find all film sessions of a given film
     public List<FilmSession> findAllFilmSessionsByFilm(Film film) {
     	List<FilmSession> filmSessions = filmSessionRepository.findAllByFilm(film);
     	if (filmSessions.isEmpty()) {
